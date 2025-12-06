@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>算法讲堂第十二讲 - 并查集等 | 长安大学ACM协会</title><meta name="keywords" content="算法讲堂,并查集"><meta name="author" content="CHD-ACM"><meta name="copyright" content="CHD-ACM"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="授课人 : 方尧 授课时间 : 5月18日 19:00 授课地点 : wx3304 授课内容 : 并查集 树状数组 线段树 点击下载课件">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>算法讲堂第十二讲 - 并查集等 | 长安大学ACM协会</title><meta name="author" content="CHD-ACM"><meta name="copyright" content="CHD-ACM"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="授课人 : 方尧 授课时间 : 5月18日 19:00 授课地点 : wx3304 授课内容 : 并查集 树状数组 线段树 点击下载课件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法讲堂第十二讲 - 并查集等">
 <meta property="og:url" content="http://example.com/2019/05/18/BIT/index.html">
@@ -7,29 +7,133 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/home-bg.jpg">
 <meta property="article:published_time" content="2019-05-17T16:00:00.000Z">
-<meta property="article:modified_time" content="2024-08-02T14:27:46.509Z">
+<meta property="article:modified_time" content="2023-12-09T02:56:43.000Z">
 <meta property="article:author" content="CHD-ACM">
-<meta property="article:tag" content="算法讲堂">
 <meta property="article:tag" content="并查集">
+<meta property="article:tag" content="算法讲堂">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/home-bg.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/2019/05/18/BIT/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="http://example.com/img/home-bg.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "算法讲堂第十二讲 - 并查集等",
+  "url": "http://example.com/2019/05/18/BIT/",
+  "image": "http://example.com/img/home-bg.jpg",
+  "datePublished": "2019-05-17T16:00:00.000Z",
+  "dateModified": "2023-12-09T02:56:43.000Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "CHD-ACM",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2019/05/18/BIT/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3-b2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
-  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
   copy: {
     success: '复制成功',
-    error: '复制错误',
+    error: '复制失败',
     noSupport: '浏览器不支持'
   },
   relativeDate: {
     homepage: false,
     post: false
   },
-  runtime: '天',
-  date_suffix: {
+  runtime: '',
+  dateSuffix: {
     just: '刚刚',
     min: '分钟前',
     hour: '小时前',
@@ -37,208 +141,28 @@
     month: '个月前'
   },
   copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
-  source: {
-    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-    },
-    fancybox: {
-      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
-    }
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
   },
   isPhotoFigcaption: false,
-  islazyload: true,
-  isanchor: false
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
   title: '算法讲堂第十二讲 - 并查集等',
-  isPost: true,
-  isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-08-02 22:27:46'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/icon.css" medai="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/kean-logo.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">56</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-compass"></i><span> 关于我们</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/2014/04/02/cauu/"><i class="fa-fw fas fa-question"></i><span> What’s ACM-ICPC ?</span></a></li><li><a class="site-page child" href="/2018/07/28/%E7%A4%BE%E5%9B%A2%E6%B4%BB%E5%8A%A8%E4%BB%8B%E7%BB%8D/"><i class="fa-fw fas fa-bars"></i><span> 协会活动</span></a></li><li><a class="site-page child" href="/2018/07/28/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"><i class="fa-fw fas fa-location-arrow"></i><span> 入门指南</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/2016/"><span> 2016陕西省赛</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 集训队</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/team/"><i class="fa-fw fas fa-users"></i><span> 成员</span></a></li><li><a class="site-page child" href="/award/"><i class="fa-fw fas fa-award"></i><span> 荣誉</span></a></li><li><a class="site-page child" href="/image/"><i class="fa-fw iconfont icon-camera"></i><span> 获奖瞬间</span></a></li><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/puzzle/"><i class="fa-fw fas fa-gamepad"></i><span> 趣味拼图</span></a></div><div class="menus_item"><a class="site-page" href="/faq/"><i class="fa-fw fas fa-question"></i><span> FAQ</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/home-bg.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">长安大学ACM协会</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-compass"></i><span> 关于我们</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/2014/04/02/cauu/"><i class="fa-fw fas fa-question"></i><span> What’s ACM-ICPC ?</span></a></li><li><a class="site-page child" href="/2018/07/28/%E7%A4%BE%E5%9B%A2%E6%B4%BB%E5%8A%A8%E4%BB%8B%E7%BB%8D/"><i class="fa-fw fas fa-bars"></i><span> 协会活动</span></a></li><li><a class="site-page child" href="/2018/07/28/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"><i class="fa-fw fas fa-location-arrow"></i><span> 入门指南</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/2016/"><span> 2016陕西省赛</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 集训队</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/team/"><i class="fa-fw fas fa-users"></i><span> 成员</span></a></li><li><a class="site-page child" href="/award/"><i class="fa-fw fas fa-award"></i><span> 荣誉</span></a></li><li><a class="site-page child" href="/image/"><i class="fa-fw iconfont icon-camera"></i><span> 获奖瞬间</span></a></li><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/puzzle/"><i class="fa-fw fas fa-gamepad"></i><span> 趣味拼图</span></a></div><div class="menus_item"><a class="site-page" href="/faq/"><i class="fa-fw fas fa-question"></i><span> FAQ</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">算法讲堂第十二讲 - 并查集等</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-05-17T16:00:00.000Z" title="发表于 2019-05-18 00:00:00">2019-05-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-08-02T14:27:46.509Z" title="更新于 2024-08-02 22:27:46">2024-08-02</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="算法讲堂第十二讲 - 并查集等"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><strong>授课人 : 方尧</strong></p>
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/kean-logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">56</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-compass"></i><span> 关于我们</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/2014/04/02/cauu/"><i class="fa-fw fas fa-question"></i><span> What’s ACM-ICPC ?</span></a></li><li><a class="site-page child" href="/2018/07/28/%E7%A4%BE%E5%9B%A2%E6%B4%BB%E5%8A%A8%E4%BB%8B%E7%BB%8D/"><i class="fa-fw fas fa-bars"></i><span> 协会活动</span></a></li><li><a class="site-page child" href="/2018/07/28/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"><i class="fa-fw fas fa-location-arrow"></i><span> 入门指南</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/2016/"><span> 2016陕西省赛</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><span> 集训队</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/team/"><i class="fa-fw fas fa-users"></i><span> 成员</span></a></li><li><a class="site-page child" href="/award/"><i class="fa-fw fas fa-award"></i><span> 荣誉</span></a></li><li><a class="site-page child" href="/image/"><i class="fa-fw iconfont icon-camera"></i><span> 获奖瞬间</span></a></li><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/puzzle/"><i class="fa-fw fas fa-gamepad"></i><span> 趣味拼图</span></a></div><div class="menus_item"><a class="site-page" href="/faq/"><i class="fa-fw fas fa-question"></i><span> FAQ</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/home-bg.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">长安大学ACM协会</span></a><a class="nav-page-title" href="/"><span class="site-name">算法讲堂第十二讲 - 并查集等</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-compass"></i><span> 关于我们</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/2014/04/02/cauu/"><i class="fa-fw fas fa-question"></i><span> What’s ACM-ICPC ?</span></a></li><li><a class="site-page child" href="/2018/07/28/%E7%A4%BE%E5%9B%A2%E6%B4%BB%E5%8A%A8%E4%BB%8B%E7%BB%8D/"><i class="fa-fw fas fa-bars"></i><span> 协会活动</span></a></li><li><a class="site-page child" href="/2018/07/28/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"><i class="fa-fw fas fa-location-arrow"></i><span> 入门指南</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/2016/"><span> 2016陕西省赛</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><span> 集训队</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/team/"><i class="fa-fw fas fa-users"></i><span> 成员</span></a></li><li><a class="site-page child" href="/award/"><i class="fa-fw fas fa-award"></i><span> 荣誉</span></a></li><li><a class="site-page child" href="/image/"><i class="fa-fw iconfont icon-camera"></i><span> 获奖瞬间</span></a></li><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/puzzle/"><i class="fa-fw fas fa-gamepad"></i><span> 趣味拼图</span></a></div><div class="menus_item"><a class="site-page" href="/faq/"><i class="fa-fw fas fa-question"></i><span> FAQ</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">算法讲堂第十二讲 - 并查集等</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-05-17T16:00:00.000Z" title="发表于 2019-05-18 00:00:00">2019-05-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-12-09T02:56:43.000Z" title="更新于 2023-12-09 10:56:43">2023-12-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p><strong>授课人 : 方尧</strong></p>
 <p><strong>授课时间 : 5月18日 19:00</strong></p>
 <p><strong>授课地点 : wx3304</strong></p>
 <p><strong>授课内容 : 并查集 树状数组 线段树</strong></p>
-<p><strong><a href="/cources/并树线.pptx">点击下载课件</a></strong></p>
-</article><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%82/">算法讲堂</a><a class="post-meta__tags" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a></div><div class="post_share"><div class="social-share" data-image="/img/home-bg.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/05/23/DP/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/home-bg.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">算法讲堂第十三讲 - DP进阶一</div></div></a></div><div class="next-post pull-right"><a href="/2019/05/04/Probability/"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/home-bg.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法讲堂第十一讲 - 组合计数等</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2016/12/10/bcj/" title="长安大学ACM协会讲课记录之『基础数据结构—并查集』"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/home-bg.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2016-12-10</div><div class="title">长安大学ACM协会讲课记录之『基础数据结构—并查集』</div></div></a></div><div><a href="/2019/11/02/zzy/" title="2019算法讲堂第五讲-STL&并查集"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/home-bg.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-11-02</div><div class="title">2019算法讲堂第五讲-STL&并查集</div></div></a></div><div><a href="/2022/05/05/2022春季算法讲堂3/" title="2022春季算法讲堂（3）"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/home-bg.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-05</div><div class="title">2022春季算法讲堂（3）</div></div></a></div><div><a href="/2014/06/30/manacher-algorithm/" title="Manacher's algorithm"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/home-bg.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2014-06-30</div><div class="title">Manacher's algorithm</div></div></a></div><div><a href="/2018/09/21/C_first/" title="算法讲堂第一讲 - C语言入门1"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/home-bg.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-09-21</div><div class="title">算法讲堂第一讲 - C语言入门1</div></div></a></div><div><a href="/2018/09/29/C_second/" title="算法讲堂第二讲 - C语言入门2"><img class="cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/home-bg.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-09-29</div><div class="title">算法讲堂第二讲 - C语言入门2</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/kean-logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">CHD-ACM</div><div class="author-info__description">coding changes the world!</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">56</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://oj.chdacm.cn"><i class="fas fa-code"></i><span>Go To OnlineJudge</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=8N1yZIvP" target="_blank" title="QQ"><i class="fab iconfont icon-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/1674174622/" target="_blank" title="bilibili"><i class="fab iconfont icon-bilibili-line"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">this is chd acmer !</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/04/%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7/" title="图的连通性">图的连通性</a><time datetime="2024-08-04T11:57:49.000Z" title="发表于 2024-08-04 19:57:49">2024-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/05/2022%E6%98%A5%E5%AD%A3%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%826/" title="2022春季算法讲堂（6）">2022春季算法讲堂（6）</a><time datetime="2022-05-05T07:48:40.000Z" title="发表于 2022-05-05 15:48:40">2022-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/05/2022%E6%98%A5%E5%AD%A3%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%825/" title="2022春季算法讲堂（5）">2022春季算法讲堂（5）</a><time datetime="2022-05-05T07:48:10.000Z" title="发表于 2022-05-05 15:48:10">2022-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/05/2022%E6%98%A5%E5%AD%A3%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%824/" title="2022春季算法讲堂（4）">2022春季算法讲堂（4）</a><time datetime="2022-05-05T07:48:06.000Z" title="发表于 2022-05-05 15:48:06">2022-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/05/2022%E6%98%A5%E5%AD%A3%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%823/" title="2022春季算法讲堂（3）">2022春季算法讲堂（3）</a><time datetime="2022-05-05T07:47:59.000Z" title="发表于 2022-05-05 15:47:59">2022-05-05</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/home-bg.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2014 - 2024 By CHD-ACM</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
-  window.MathJax = {
-    tex: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]],
-      tags: 'ams'
-    },
-    chtml: {
-      scale: 1.2
-    },
-    options: {
-      renderActions: {
-        findScript: [10, doc => {
-          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
-            const display = !!node.type.match(/; *mode=display/)
-            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
-            const text = document.createTextNode('')
-            node.parentNode.replaceChild(text, node)
-            math.start = {node: text, delim: '', n: 0}
-            math.end = {node: text, delim: '', n: 0}
-            doc.math.push(math)
-          }
-        }, ''],
-        insertScript: [200, () => {
-          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
-            const target = node.parentNode
-            if (target.nodeName.toLowerCase() === 'li') {
-              target.parentNode.classList.add('has-jax')
-            } else {
-              target.classList.add('has-jax')
-            }
-          });
-        }, '', false]
-      }
-    }
-  }
-  
-  const script = document.createElement('script')
-  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
-  script.id = 'MathJax-script'
-  script.async = true
-  document.head.appendChild(script)
-} else {
-  MathJax.startup.document.state(0)
-  MathJax.texReset()
-  MathJax.typeset()
-}</script><script>(()=>{
-  const $countDom = document.getElementById('twikoo-count')
-  const init = () => {
-    twikoo.init(Object.assign({
-      el: '#twikoo-wrap',
-      envId: 'https://twikoo-three.vercel.app/',
-      region: 'ap-shanghai'
-    }, null))
-  }
-
-  const getCount = () => {
-    twikoo.getCommentsCount({
-      envId: 'https://twikoo-three.vercel.app/',
-      region: 'ap-shanghai',
-      urls: [window.location.pathname],
-      includeReply: false
-    }).then(function (res) {
-      $countDom.innerText = res[0].count
-    }).catch(function (err) {
-      console.error(err);
-    });
-  }
-
-  const loadTwikoo = (bool = false) => {
-    if (typeof twikoo === 'object') {
-      init()
-      bool && $countDom && setTimeout(getCount,0)
-    } else {
-      getScript('https://cdn.jsdelivr.net/npm/twikoo/dist/twikoo.all.min.js').then(()=> {
-        init()
-        bool && $countDom && setTimeout(getCount,0)
-      })
-    }
-  }
-
-  if ('Twikoo' === 'Twikoo' || !true) {
-    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
-    else loadTwikoo(true)
-  } else {
-    window.loadOtherComment = () => {
-      loadTwikoo()
-    }
-  }
-})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2712924_e8rmb8q5fcw.css"></script><!-- hexo injector body_end end --></body></html>
+<p><strong><a href="/cources/%E5%B9%B6%E6%A0%91%E7%BA%BF.pptx">点击下载课件</a></strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">CHD-ACM</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2019/05/18/BIT/">http://example.com/2019/05/18/BIT/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">长安大学ACM协会</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%82/">算法讲堂</a><a class="post-meta__tags" href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/">并查集</a></div><div class="post-share"><div class="social-share" data-image="/img/home-bg.jpg" data-sites="facebook,x,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.6/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/2019/05/23/DP/" title="算法讲堂第十三讲 - DP进阶一"><img class="cover" src="/img/home-bg.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">算法讲堂第十三讲 - DP进阶一</div></div><div class="info-2"><div class="info-item-1">授课人 : 韩耀东 授课时间 : 5月23日 19:00 授课地点 : wx3304 授课内容 : 区间DP 树形DP 点击下载课件 DP第一讲基础概念三要素：”状态“ ”阶段“ ”决策“ 三个基本条件：子问题重叠性，无后效性，最优子结构性质 把原问题视作若干个重叠子问题进行求解，每个子问题求解的过程就是一个“阶段”。 LIS(最长上升子序列)$d[i] &#x3D; max_{0\leq j &lt; i, a[j]&lt;a[i]}{d[j]+1}$ LCS（最长公共子序列）$$d[i,j] &#x3D; max\begin{cases}d[i-1][j]  &amp; \d[i][j-1] &amp; \d[i-1][j-1] + 1 &amp; \text{if a[i] &#x3D; b[i]}\\end{cases}$$ 数字三角形$$d[i][j] &#x3D; a[i][j] + max\begin{cases}d[i-1][j] &amp;\d[i-1][j-1] &amp; \text{if j&gt;1}\\end{cases}$$ 背包0&#x2F;1背包...</div></div></div></a><a class="pagination-related" href="/2019/05/04/Probability/" title="算法讲堂第十一讲 - 组合计数等"><img class="cover" src="/img/home-bg.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">算法讲堂第十一讲 - 组合计数等</div></div><div class="info-2"><div class="info-item-1">授课人 : 陈南曦 授课时间 : 5月4日 19:00 授课地点 : wx3304 授课内容 : 组合计数，容斥，概率dp，博弈 点击下载课件 </div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2016/12/10/bcj/" title="长安大学ACM协会讲课记录之『基础数据结构—并查集』"><img class="cover" src="/img/home-bg.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2016-12-10</div><div class="info-item-2">长安大学ACM协会讲课记录之『基础数据结构—并查集』</div></div><div class="info-2"><div class="info-item-1">讲课之前&#8195;我们不妨先考虑下傻瓜式合并，加入我们开一个数组表示某一个集合，那么在集合合并的时候，需要把每一个元素移动至对应集合，合并复杂度O(n),查找复杂度O(n)。我们能优化合并么？当然可以，用链表或者STL的list。   由于不支持随机存取，那么查找的复杂度还是O(n)。怎么优化查找，那就用并查集了   概述&#8195;并查集顾名思义就是有“合并集合”和“查找集合”两种操作的关于数据结构的一种算法。   操作初始化：12345678void init() &#123;    for(int i=0; i&lt;N; i++)    &#123;        par[i] = i;        rank[i] = 1;    &#125;&#125;   查找：12345int find(int x)&#123;    return par[x] = find(par[x]);&#125; 合并：1234567891011121314void unite(int x,int y)&#123;    x = find(x);    y = find(y);  ...</div></div></div></a><a class="pagination-related" href="/2019/11/02/zzy/" title="2019算法讲堂第五讲-STL&amp;并查集"><img class="cover" src="/img/home-bg.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2019-11-02</div><div class="info-item-2">2019算法讲堂第五讲-STL&amp;并查集</div></div><div class="info-2"><div class="info-item-1">课件下载 </div></div></div></a><a class="pagination-related" href="/2022/05/05/2022%E6%98%A5%E5%AD%A3%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%823/" title="2022春季算法讲堂（3）"><img class="cover" src="/img/home-bg.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-05</div><div class="info-item-2">2022春季算法讲堂（3）</div></div><div class="info-2"><div class="info-item-1">点击下载课件 并查集引入并查集的实现初始化查询合并路径压缩按秩合并初始化（按秩合并）合并（按秩合并）哈希表简介哈希函数构造冲突与处理拉链法实现开放寻址法实现字符串哈希哈希函数前缀子串实现博弈论博弈论题目特点经典博弈巴什博奕（Bash Game）威佐夫博弈（Wythoff Game）满足上述公式的性质尼姆博弈（Nim Game）推广证明斐波那契博弈SG函数ICG(公平组合)游戏必胜态与必败态DAG(有向无环图)中的博弈SG定理SG定理的应用主讲人：孙如祥 </div></div></div></a><a class="pagination-related" href="/2014/06/30/manacher-algorithm/" title="Manacher&#39;s algorithm"><img class="cover" src="/img/home-bg.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2014-06-30</div><div class="info-item-2">Manacher&#39;s algorithm</div></div><div class="info-2"><div class="info-item-1">Manacher’s algorithm 以$O(n)$的线性时间求一个字符串的最大回文子串。   1. 预处理一个最棘手的问题是需要考虑最长回文子串的长度为奇数和偶数的情况。我们通过在任意两个字符之间填充 # 的方法， 将原字符串 $S$ 转化为辅助字符串 $T$，具体例子如下：  S &#x3D; a b a a b aT &#x3D; # a # b # a # a # b # a #    转化后便可不必再考虑奇偶问题，同时辅助字符串的长度也变为奇数。转化后字符串$T$的长度为奇数：在长度为奇数的字符串之间(包括外侧)，有偶数个位置；在长度为偶数的字符串之间(包括外侧)，有奇数个位置，所有这样处理之后，字符串的长度都会变为奇数。事实上，公式$2 \times len + 1$ 已经说明预处理之后的字符串长度必为奇数。奇回文串和偶回文串一起处理：以字符 # 为中点位置，处理的就是偶回文串的情况，以其他字符为中点位置，处理的就是奇回文串的情况。   为了避免出现数组访问越界的边界问题，我们将字符串$T$的首部再添加一个原字符串$S$中没有出现的字符，最后处理完的字符串如下： ...</div></div></div></a><a class="pagination-related" href="/2018/09/21/C_first/" title="算法讲堂第一讲 - C语言入门1"><img class="cover" src="/img/home-bg.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-09-21</div><div class="info-item-2">算法讲堂第一讲 - C语言入门1</div></div><div class="info-2"><div class="info-item-1">点击下载课件 </div></div></div></a><a class="pagination-related" href="/2018/09/29/C_second/" title="算法讲堂第二讲 - C语言入门2"><img class="cover" src="/img/home-bg.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2018-09-29</div><div class="info-item-2">算法讲堂第二讲 - C语言入门2</div></div><div class="info-2"><div class="info-item-1">授课人 : 吴兴 授课时间 : 9月30日 19:00 授课地点 : wx3303 点击下载课件 </div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/kean-logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">CHD-ACM</div><div class="author-info-description">coding changes the world!</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">56</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://oj.chdacm.cn"><i class="fas fa-code"></i><span>Go To OnlineJudge</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://jq.qq.com/?_wv=1027&amp;k=8N1yZIvP" target="_blank" title="QQ"><i class="fab iconfont icon-qq"></i></a><a class="social-icon" href="https://space.bilibili.com/1674174622/" target="_blank" title="bilibili"><i class="fab iconfont icon-bilibili-line"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">this is chd ACMer !</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/08/04/%E5%9B%BE%E7%9A%84%E8%BF%9E%E9%80%9A%E6%80%A7-20241013013244/" title="图的连通性">图的连通性</a><time datetime="2024-08-04T11:57:49.000Z" title="发表于 2024-08-04 19:57:49">2024-08-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/05/2022%E6%98%A5%E5%AD%A3%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%826/" title="2022春季算法讲堂（6）">2022春季算法讲堂（6）</a><time datetime="2022-05-05T07:48:40.000Z" title="发表于 2022-05-05 15:48:40">2022-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/05/2022%E6%98%A5%E5%AD%A3%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%825/" title="2022春季算法讲堂（5）">2022春季算法讲堂（5）</a><time datetime="2022-05-05T07:48:10.000Z" title="发表于 2022-05-05 15:48:10">2022-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/05/2022%E6%98%A5%E5%AD%A3%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%824/" title="2022春季算法讲堂（4）">2022春季算法讲堂（4）</a><time datetime="2022-05-05T07:48:06.000Z" title="发表于 2022-05-05 15:48:06">2022-05-05</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2022/05/05/2022%E6%98%A5%E5%AD%A3%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%823/" title="2022春季算法讲堂（3）">2022春季算法讲堂（3）</a><time datetime="2022-05-05T07:47:59.000Z" title="发表于 2022-05-05 15:47:59">2022-05-05</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2014 - 2025 By CHD-ACM</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3-b2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3-b2"></script><script src="/js/main.js?v=5.5.3-b2"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.3-b2"></script></div></div></body></html>
