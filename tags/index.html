@@ -1,33 +1,122 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>tags | 长安大学ACM协会</title><meta name="author" content="CHD-ACM"><meta name="copyright" content="CHD-ACM"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="coding changes the world!">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>tags | 长安大学ACM协会</title><meta name="author" content="CHD-ACM"><meta name="copyright" content="CHD-ACM"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="coding changes the world!">
 <meta property="og:type" content="website">
 <meta property="og:title" content="tags">
 <meta property="og:url" content="http://example.com/tags/index.html">
 <meta property="og:site_name" content="长安大学ACM协会">
 <meta property="og:description" content="coding changes the world!">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/home-bg.jpg">
+<meta property="og:image" content="http://example.com/img/kean-logo.png">
 <meta property="article:published_time" content="2021-07-25T15:16:21.000Z">
-<meta property="article:modified_time" content="2024-08-02T14:27:46.875Z">
+<meta property="article:modified_time" content="2025-12-06T07:30:12.485Z">
 <meta property="article:author" content="CHD-ACM">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/img/home-bg.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="http://example.com/tags/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="http://example.com/img/kean-logo.png"><script type="application/ld+json"></script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/tags/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=5.5.3-b2"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
   root: '/',
   algolia: undefined,
-  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"pagination":{"enable":false,"hitsPerPage":8},"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
   translate: undefined,
-  noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
   copy: {
     success: '复制成功',
-    error: '复制错误',
+    error: '复制失败',
     noSupport: '浏览器不支持'
   },
   relativeDate: {
     homepage: false,
     post: false
   },
-  runtime: '天',
-  date_suffix: {
+  runtime: '',
+  dateSuffix: {
     just: '刚刚',
     min: '分钟前',
     hour: '小时前',
@@ -35,160 +124,23 @@
     month: '个月前'
   },
   copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
-  source: {
-    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-    },
-    fancybox: {
-      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
-    }
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.12.0/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
   },
   isPhotoFigcaption: false,
-  islazyload: true,
-  isanchor: false
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
   title: 'tags',
-  isPost: false,
-  isHome: false,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2024-08-02 22:27:46'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          if (t === 'dark') activateDarkMode()
-          else if (t === 'light') activateLightMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/custom.css"><link rel="stylesheet" href="/css/icon.css" medai="defer" onload="this.media='all'"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-tag-plugins-plus@latest/lib/tag_plugins.css" media="defer" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.2"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/img/kean-logo.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">56</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-compass"></i><span> 关于我们</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/2014/04/02/cauu/"><i class="fa-fw fas fa-question"></i><span> What’s ACM-ICPC ?</span></a></li><li><a class="site-page child" href="/2018/07/28/%E7%A4%BE%E5%9B%A2%E6%B4%BB%E5%8A%A8%E4%BB%8B%E7%BB%8D/"><i class="fa-fw fas fa-bars"></i><span> 协会活动</span></a></li><li><a class="site-page child" href="/2018/07/28/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"><i class="fa-fw fas fa-location-arrow"></i><span> 入门指南</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/2016/"><span> 2016陕西省赛</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 集训队</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/team/"><i class="fa-fw fas fa-users"></i><span> 成员</span></a></li><li><a class="site-page child" href="/award/"><i class="fa-fw fas fa-award"></i><span> 荣誉</span></a></li><li><a class="site-page child" href="/image/"><i class="fa-fw iconfont icon-camera"></i><span> 获奖瞬间</span></a></li><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/puzzle/"><i class="fa-fw fas fa-gamepad"></i><span> 趣味拼图</span></a></div><div class="menus_item"><a class="site-page" href="/faq/"><i class="fa-fw fas fa-question"></i><span> FAQ</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url('/img/home-bg.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">长安大学ACM协会</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-compass"></i><span> 关于我们</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/2014/04/02/cauu/"><i class="fa-fw fas fa-question"></i><span> What’s ACM-ICPC ?</span></a></li><li><a class="site-page child" href="/2018/07/28/%E7%A4%BE%E5%9B%A2%E6%B4%BB%E5%8A%A8%E4%BB%8B%E7%BB%8D/"><i class="fa-fw fas fa-bars"></i><span> 协会活动</span></a></li><li><a class="site-page child" href="/2018/07/28/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"><i class="fa-fw fas fa-location-arrow"></i><span> 入门指南</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/2016/"><span> 2016陕西省赛</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 集训队</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/team/"><i class="fa-fw fas fa-users"></i><span> 成员</span></a></li><li><a class="site-page child" href="/award/"><i class="fa-fw fas fa-award"></i><span> 荣誉</span></a></li><li><a class="site-page child" href="/image/"><i class="fa-fw iconfont icon-camera"></i><span> 获奖瞬间</span></a></li><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/puzzle/"><i class="fa-fw fas fa-gamepad"></i><span> 趣味拼图</span></a></div><div class="menus_item"><a class="site-page" href="/faq/"><i class="fa-fw fas fa-question"></i><span> FAQ</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">tags</h1></div></header><main class="layout hide-aside" id="content-inner"><div id="page"><div class="tag-cloud-title is-center">标签 - <span class="tag-cloud-amount">56</span></div><div class="tag-cloud-list is-center"><a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%82/" style="font-size: 2.1em; color: rgb(150, 35, 188)">算法讲堂</a><a href="/tags/Manacher/" style="font-size: 1.35em; color: rgb(178, 95, 14)">Manacher</a><a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 1.65em; color: rgb(66, 196, 150)">题解</a><a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 1.65em; color: rgb(116, 176, 46)">并查集</a><a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 1.95em; color: rgb(9, 15, 59)">C语言</a><a href="/tags/%E5%9F%BA%E7%A1%80%E6%95%B0%E8%AE%BA/" style="font-size: 1.35em; color: rgb(119, 113, 78)">基础数论</a><a href="/tags/%E6%9E%9A%E4%B8%BE/" style="font-size: 1.35em; color: rgb(115, 17, 191)">枚举</a><a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 1.5em; color: rgb(161, 150, 146)">贪心</a><a href="/tags/%E4%BA%8C%E5%88%86/" style="font-size: 1.5em; color: rgb(29, 145, 190)">二分</a><a href="/tags/STL/" style="font-size: 1.5em; color: rgb(30, 89, 160)">STL</a><a href="/tags/DFS/" style="font-size: 1.35em; color: rgb(109, 114, 69)">DFS</a><a href="/tags/BFS/" style="font-size: 1.35em; color: rgb(90, 179, 5)">BFS</a><a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.8em; color: rgb(190, 184, 9)">动态规划</a><a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 1.35em; color: rgb(42, 180, 27)">单调栈</a><a href="/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/" style="font-size: 1.35em; color: rgb(153, 84, 37)">单调队列</a><a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 1.2em; color: rgb(56, 106, 110)">哈希</a><a href="/tags/KMP/" style="font-size: 1.2em; color: rgb(130, 22, 178)">KMP</a><a href="/tags/Trie/" style="font-size: 1.2em; color: rgb(12, 121, 26)">Trie</a><a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 1.35em; color: rgb(161, 31, 173)">数论</a><a href="/tags/%E7%BB%84%E5%90%88%E8%AE%A1%E6%95%B0/" style="font-size: 1.2em; color: rgb(103, 0, 71)">组合计数</a><a href="/tags/%E5%8C%BA%E9%97%B4DP/" style="font-size: 1.2em; color: rgb(32, 78, 128)">区间DP</a><a href="/tags/%E6%A0%91%E5%BD%A2DP/" style="font-size: 1.2em; color: rgb(73, 13, 115)">树形DP</a><a href="/tags/%E5%80%8D%E5%A2%9E%E4%BC%98%E5%8C%96DP/" style="font-size: 1.2em; color: rgb(127, 186, 135)">倍增优化DP</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96DP/" style="font-size: 1.2em; color: rgb(196, 92, 120)">数据结构优化DP</a><a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" style="font-size: 1.5em; color: rgb(120, 129, 112)">博弈论</a><a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.35em; color: rgb(91, 23, 129)">字符串</a><a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" style="font-size: 1.2em; color: rgb(143, 67, 1)">组合数学</a><a href="/tags/%E6%A6%82%E7%8E%87/" style="font-size: 1.2em; color: rgb(140, 130, 74)">概率</a><a href="/tags/%E6%A0%88/" style="font-size: 1.35em; color: rgb(159, 66, 184)">栈</a><a href="/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9DP/" style="font-size: 1.2em; color: rgb(182, 73, 10)">状态压缩DP</a><a href="/tags/%E6%95%B0%E4%BD%8DDP/" style="font-size: 1.2em; color: rgb(1, 127, 52)">数位DP</a><a href="/tags/%E8%AE%A1%E6%95%B0DP/" style="font-size: 1.2em; color: rgb(190, 26, 90)">计数DP</a><a href="/tags/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96DP/" style="font-size: 1.2em; color: rgb(167, 142, 151)">斜率优化DP</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.65em; color: rgb(81, 148, 129)">数据结构</a><a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 1.35em; color: rgb(36, 30, 168)">线段树</a><a href="/tags/%E7%AC%9B%E5%8D%A1%E5%B0%94%E6%A0%91/" style="font-size: 1.2em; color: rgb(166, 70, 154)">笛卡尔树</a><a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 1.65em; color: rgb(29, 29, 96)">图论</a><a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" style="font-size: 1.35em; color: rgb(71, 133, 182)">计算几何</a><a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 1.35em; color: rgb(187, 49, 114)">前缀和</a><a href="/tags/%E5%B7%AE%E5%88%86/" style="font-size: 1.35em; color: rgb(196, 113, 118)">差分</a><a href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" style="font-size: 1.2em; color: rgb(158, 99, 133)">高精度</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80/" style="font-size: 1.2em; color: rgb(181, 181, 160)">数据结构基础</a><a href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/" style="font-size: 1.35em; color: rgb(82, 75, 161)">二分图</a><a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" style="font-size: 1.35em; color: rgb(77, 78, 125)">网络流</a><a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 1.2em; color: rgb(117, 67, 38)">搜索</a><a href="/tags/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/" style="font-size: 1.2em; color: rgb(25, 82, 200)">后缀数组</a><a href="/tags/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" style="font-size: 1.2em; color: rgb(69, 30, 12)">入门指南</a><a href="/tags/markdown/" style="font-size: 1.5em; color: rgb(71, 5, 144)">markdown</a><a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" style="font-size: 1.2em; color: rgb(106, 108, 61)">树状数组</a><a href="/tags/%E7%A6%BB%E6%95%A3%E5%8C%96/" style="font-size: 1.2em; color: rgb(94, 141, 16)">离散化</a><a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 1.2em; color: rgb(16, 173, 67)">链表</a><a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 1.2em; color: rgb(132, 166, 62)">队列</a><a href="/tags/%E5%9B%BE/" style="font-size: 1.2em; color: rgb(66, 188, 133)">图</a><a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" style="font-size: 1.2em; color: rgb(55, 49, 191)">最短路</a><a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" style="font-size: 1.2em; color: rgb(187, 128, 139)">最小生成树</a><a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 1.2em; color: rgb(157, 100, 94)">哈希表</a></div></div></main><footer id="footer" style="background-image: url('/img/home-bg.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2014 - 2024 By CHD-ACM</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
-  window.MathJax = {
-    tex: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"]],
-      tags: 'ams'
-    },
-    chtml: {
-      scale: 1.2
-    },
-    options: {
-      renderActions: {
-        findScript: [10, doc => {
-          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
-            const display = !!node.type.match(/; *mode=display/)
-            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
-            const text = document.createTextNode('')
-            node.parentNode.replaceChild(text, node)
-            math.start = {node: text, delim: '', n: 0}
-            math.end = {node: text, delim: '', n: 0}
-            doc.math.push(math)
-          }
-        }, ''],
-        insertScript: [200, () => {
-          document.querySelectorAll('mjx-container:not\([display]\)').forEach(node => {
-            const target = node.parentNode
-            if (target.nodeName.toLowerCase() === 'li') {
-              target.parentNode.classList.add('has-jax')
-            } else {
-              target.classList.add('has-jax')
-            }
-          });
-        }, '', false]
-      }
-    }
-  }
-  
-  const script = document.createElement('script')
-  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
-  script.id = 'MathJax-script'
-  script.async = true
-  document.head.appendChild(script)
-} else {
-  MathJax.startup.document.state(0)
-  MathJax.texReset()
-  MathJax.typeset()
-}</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script async src="//at.alicdn.com/t/font_2712924_e8rmb8q5fcw.css"></script><!-- hexo injector body_end end --></body></html>
+  pageType: 'page'
+}</script><meta name="generator" content="Hexo 8.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/kean-logo.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">56</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-compass"></i><span> 关于我们</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/2014/04/02/cauu/"><i class="fa-fw fas fa-question"></i><span> What’s ACM-ICPC ?</span></a></li><li><a class="site-page child" href="/2018/07/28/%E7%A4%BE%E5%9B%A2%E6%B4%BB%E5%8A%A8%E4%BB%8B%E7%BB%8D/"><i class="fa-fw fas fa-bars"></i><span> 协会活动</span></a></li><li><a class="site-page child" href="/2018/07/28/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"><i class="fa-fw fas fa-location-arrow"></i><span> 入门指南</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/2016/"><span> 2016陕西省赛</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><span> 集训队</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/team/"><i class="fa-fw fas fa-users"></i><span> 成员</span></a></li><li><a class="site-page child" href="/award/"><i class="fa-fw fas fa-award"></i><span> 荣誉</span></a></li><li><a class="site-page child" href="/image/"><i class="fa-fw iconfont icon-camera"></i><span> 获奖瞬间</span></a></li><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/puzzle/"><i class="fa-fw fas fa-gamepad"></i><span> 趣味拼图</span></a></div><div class="menus_item"><a class="site-page" href="/faq/"><i class="fa-fw fas fa-question"></i><span> FAQ</span></a></div></div></div></div><div class="page type-tags" id="body-wrap"><header class="not-home-page" id="page-header" style="background-image: url(/img/home-bg.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">长安大学ACM协会</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/index/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-compass"></i><span> 关于我们</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/2014/04/02/cauu/"><i class="fa-fw fas fa-question"></i><span> What’s ACM-ICPC ?</span></a></li><li><a class="site-page child" href="/2018/07/28/%E7%A4%BE%E5%9B%A2%E6%B4%BB%E5%8A%A8%E4%BB%8B%E7%BB%8D/"><i class="fa-fw fas fa-bars"></i><span> 协会活动</span></a></li><li><a class="site-page child" href="/2018/07/28/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/"><i class="fa-fw fas fa-location-arrow"></i><span> 入门指南</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 文章</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li><li><a class="site-page child" href="/2016/"><span> 2016陕西省赛</span></a></li></ul></div><div class="menus_item"><span class="site-page group"><span> 集训队</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/team/"><i class="fa-fw fas fa-users"></i><span> 成员</span></a></li><li><a class="site-page child" href="/award/"><i class="fa-fw fas fa-award"></i><span> 荣誉</span></a></li><li><a class="site-page child" href="/image/"><i class="fa-fw iconfont icon-camera"></i><span> 获奖瞬间</span></a></li><li><a class="site-page child" href="/links/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/puzzle/"><i class="fa-fw fas fa-gamepad"></i><span> 趣味拼图</span></a></div><div class="menus_item"><a class="site-page" href="/faq/"><i class="fa-fw fas fa-question"></i><span> FAQ</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="page-site-info"><h1 id="site-title">tags</h1></div></header><main class="layout hide-aside" id="content-inner"><div id="page"><div class="tag-cloud-list text-center"><a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%B2%E5%A0%82/" style="font-size: 1.5em; background-color: rgb(195, 50, 66);">算法讲堂</a><a href="/tags/Manacher/" style="font-size: 1.25em; background-color: rgb(67, 154, 126);">Manacher</a><a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 1.35em; background-color: rgb(117, 50, 50);">题解</a><a href="/tags/%E5%B9%B6%E6%9F%A5%E9%9B%86/" style="font-size: 1.35em; background-color: rgb(86, 177, 50);">并查集</a><a href="/tags/C%E8%AF%AD%E8%A8%80/" style="font-size: 1.45em; background-color: rgb(144, 152, 92);">C语言</a><a href="/tags/%E5%9F%BA%E7%A1%80%E6%95%B0%E8%AE%BA/" style="font-size: 1.25em; background-color: rgb(50, 182, 50);">基础数论</a><a href="/tags/%E6%9E%9A%E4%B8%BE/" style="font-size: 1.25em; background-color: rgb(190, 99, 189);">枚举</a><a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 1.3em; background-color: rgb(161, 176, 158);">贪心</a><a href="/tags/%E4%BA%8C%E5%88%86/" style="font-size: 1.3em; background-color: rgb(50, 126, 57);">二分</a><a href="/tags/STL/" style="font-size: 1.3em; background-color: rgb(141, 103, 185);">STL</a><a href="/tags/DFS/" style="font-size: 1.25em; background-color: rgb(164, 134, 154);">DFS</a><a href="/tags/BFS/" style="font-size: 1.25em; background-color: rgb(176, 61, 177);">BFS</a><a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.4em; background-color: rgb(62, 50, 50);">动态规划</a><a href="/tags/%E5%8D%95%E8%B0%83%E6%A0%88/" style="font-size: 1.25em; background-color: rgb(72, 158, 118);">单调栈</a><a href="/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/" style="font-size: 1.25em; background-color: rgb(52, 50, 63);">单调队列</a><a href="/tags/%E5%93%88%E5%B8%8C/" style="font-size: 1.2em; background-color: rgb(99, 170, 176);">哈希</a><a href="/tags/KMP/" style="font-size: 1.2em; background-color: rgb(157, 50, 50);">KMP</a><a href="/tags/Trie/" style="font-size: 1.2em; background-color: rgb(164, 50, 125);">Trie</a><a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 1.25em; background-color: rgb(183, 109, 183);">数论</a><a href="/tags/%E7%BB%84%E5%90%88%E8%AE%A1%E6%95%B0/" style="font-size: 1.2em; background-color: rgb(92, 67, 74);">组合计数</a><a href="/tags/%E5%8C%BA%E9%97%B4DP/" style="font-size: 1.2em; background-color: rgb(126, 80, 177);">区间DP</a><a href="/tags/%E6%A0%91%E5%BD%A2DP/" style="font-size: 1.2em; background-color: rgb(199, 134, 50);">树形DP</a><a href="/tags/%E5%80%8D%E5%A2%9E%E4%BC%98%E5%8C%96DP/" style="font-size: 1.2em; background-color: rgb(142, 70, 152);">倍增优化DP</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96DP/" style="font-size: 1.2em; background-color: rgb(165, 172, 112);">数据结构优化DP</a><a href="/tags/%E5%8D%9A%E5%BC%88%E8%AE%BA/" style="font-size: 1.3em; background-color: rgb(50, 112, 50);">博弈论</a><a href="/tags/%E7%BB%84%E5%90%88%E6%95%B0%E5%AD%A6/" style="font-size: 1.2em; background-color: rgb(77, 50, 71);">组合数学</a><a href="/tags/%E6%A6%82%E7%8E%87/" style="font-size: 1.2em; background-color: rgb(182, 58, 155);">概率</a><a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.25em; background-color: rgb(118, 193, 199);">字符串</a><a href="/tags/%E6%A0%88/" style="font-size: 1.25em; background-color: rgb(200, 64, 111);">栈</a><a href="/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9DP/" style="font-size: 1.2em; background-color: rgb(200, 171, 132);">状态压缩DP</a><a href="/tags/%E6%95%B0%E4%BD%8DDP/" style="font-size: 1.2em; background-color: rgb(193, 199, 71);">数位DP</a><a href="/tags/%E8%AE%A1%E6%95%B0DP/" style="font-size: 1.2em; background-color: rgb(57, 50, 89);">计数DP</a><a href="/tags/%E6%96%9C%E7%8E%87%E4%BC%98%E5%8C%96DP/" style="font-size: 1.2em; background-color: rgb(165, 81, 93);">斜率优化DP</a><a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 1.35em; background-color: rgb(50, 83, 85);">图论</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 1.35em; background-color: rgb(164, 110, 154);">数据结构</a><a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 1.25em; background-color: rgb(119, 50, 167);">线段树</a><a href="/tags/%E7%AC%9B%E5%8D%A1%E5%B0%94%E6%A0%91/" style="font-size: 1.2em; background-color: rgb(199, 64, 50);">笛卡尔树</a><a href="/tags/%E8%AE%A1%E7%AE%97%E5%87%A0%E4%BD%95/" style="font-size: 1.25em; background-color: rgb(164, 50, 50);">计算几何</a><a href="/tags/%E5%89%8D%E7%BC%80%E5%92%8C/" style="font-size: 1.25em; background-color: rgb(170, 101, 50);">前缀和</a><a href="/tags/%E5%B7%AE%E5%88%86/" style="font-size: 1.25em; background-color: rgb(50, 89, 155);">差分</a><a href="/tags/%E9%AB%98%E7%B2%BE%E5%BA%A6/" style="font-size: 1.2em; background-color: rgb(144, 112, 50);">高精度</a><a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 1.2em; background-color: rgb(175, 178, 50);">搜索</a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%9F%BA%E7%A1%80/" style="font-size: 1.2em; background-color: rgb(167, 165, 51);">数据结构基础</a><a href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE/" style="font-size: 1.25em; background-color: rgb(73, 50, 140);">二分图</a><a href="/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/" style="font-size: 1.25em; background-color: rgb(176, 124, 50);">网络流</a><a href="/tags/%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84/" style="font-size: 1.2em; background-color: rgb(194, 117, 50);">后缀数组</a><a href="/tags/%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97/" style="font-size: 1.2em; background-color: rgb(69, 191, 50);">入门指南</a><a href="/tags/markdown/" style="font-size: 1.3em; background-color: rgb(54, 120, 97);">markdown</a><a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" style="font-size: 1.2em; background-color: rgb(50, 133, 182);">树状数组</a><a href="/tags/%E7%A6%BB%E6%95%A3%E5%8C%96/" style="font-size: 1.2em; background-color: rgb(119, 97, 94);">离散化</a><a href="/tags/%E9%93%BE%E8%A1%A8/" style="font-size: 1.2em; background-color: rgb(61, 134, 50);">链表</a><a href="/tags/%E9%98%9F%E5%88%97/" style="font-size: 1.2em; background-color: rgb(63, 94, 187);">队列</a><a href="/tags/%E5%9B%BE/" style="font-size: 1.2em; background-color: rgb(50, 50, 50);">图</a><a href="/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/" style="font-size: 1.2em; background-color: rgb(107, 159, 118);">哈希表</a><a href="/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/" style="font-size: 1.2em; background-color: rgb(93, 69, 50);">最短路</a><a href="/tags/%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91/" style="font-size: 1.2em; background-color: rgb(170, 168, 150);">最小生成树</a></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2014 - 2025 By CHD-ACM</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 8.1.1</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.5.3-b2</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=5.5.3-b2"></script><script src="/js/main.js?v=5.5.3-b2"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><i class="fas fa-spinner fa-pulse" id="loading-status" hidden="hidden"></i><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="local-search-input"><input placeholder="搜索文章" type="text"/></div><hr/><div id="local-search-results"></div><div class="ais-Pagination" id="local-search-pagination" style="display:none;"><ul class="ais-Pagination-list"></ul></div><div id="local-search-stats"></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=5.5.3-b2"></script></div></div></body></html>
